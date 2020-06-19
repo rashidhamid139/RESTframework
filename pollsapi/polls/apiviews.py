@@ -12,10 +12,13 @@ from rest_framework.exceptions import PermissionDenied
 
 
 
-
 class PollViewSet(viewsets.ModelViewSet):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
+
+    def get_queryset(self):
+        tenant = tenant_from_request(self.request)
+        return super(PollViewSet, self).get_queryset().filter(tenant=tenant)
 
     def destroy(self, request, *args, **kwargs):
         poll = Poll.objects.get(pk=self.kwargs["pk"])
