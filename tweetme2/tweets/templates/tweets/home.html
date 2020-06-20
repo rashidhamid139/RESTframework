@@ -1,0 +1,24 @@
+{% extends 'tweets/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row text-center">
+        <div class="col">
+            <h1>Testing Hello</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4 mx-auto col-10">
+            <form class="form" id="tweet-create-form" method="POST" action="/tweet-create/">
+                {% csrf_token %}
+                <input type="hidden" value="/" name="next" />
+                <textarea class="form-control" name="content" placeholder="Your Tweet"></textarea>
+                <button type="submit"  class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class='row ml-4' id="tweets">
+    </div>
+{% endblock %}
+{% block JavaScript %}
+    <script rel="stylesheet" src="{% static 'js/home.js' %}"></script>
+{% endblock %}

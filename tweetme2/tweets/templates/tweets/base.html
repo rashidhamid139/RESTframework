@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.4.4.1.min.css' %}">
+
+    <title>Tweetme2! {% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    {% include 'tweets/navbar.html' %}
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {% block JavaScript %}
+    {% endblock %}
+    <script rel="stylesheet" src="{% static 'js/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
