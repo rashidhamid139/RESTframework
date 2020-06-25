@@ -7,7 +7,10 @@ from .models import Tweet
 
 TWEET_ACTION_OPTIONS = ["like", "unlike", "retweet"]
 
-class TweetSerializer(serializers.ModelSerializer):
+
+
+
+class TweetCreateSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Tweet
@@ -23,6 +26,7 @@ class TweetSerializer(serializers.ModelSerializer):
 class TweetActionSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     action = serializers.CharField()
+    content = serializers.CharField(allow_blank=True, required=False)
 
 
     def validate_action(self, value):
@@ -30,3 +34,13 @@ class TweetActionSerializer(serializers.Serializer):
         if not value in TWEET_ACTION_OPTIONS:
             raise serializers.ValidationError("Not a Valid action")
         return value
+
+
+class TweetSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField(read_only=True)
+    parent = TweetCreateSerializer(read_only=True)
+    class Meta:
+        model = Tweet
+        fields = ["id", "content", "likes", "is_retweet", "parent"]
+    def get_likes(self, obj):
+        return obj.likes.count()

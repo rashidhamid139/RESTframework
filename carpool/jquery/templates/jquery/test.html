@@ -3,16 +3,28 @@
 <html>
   <head>
     <title>Underscore.js Templates</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <!-- CSS only -->
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>  
+    <link rel="stylsheet" href="{% static 'css/test.css' %}">
     <script src="{% static 'js/main1.js' %}"></script>
   </head>
   <body>
 
-    <div id="buttonContainer">
-      <button class="clicky">Button 1</button>
+    <div class="tabs">
+      <ul class="tabs-nav">
+        <li><a href="#tab-1">Features</a></li>
+        <li><a href="#tab-2">Details</a></li>
+      </ul>
+      <div class="tabs-stage">
+        <div id="tab-1">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec neque nisi, dictum aliquet lectus.</p>
+        </div>
+        <div id="tab-2">
+          <p>Phasellus pharetra aliquet viverra. Donec scelerisque tincidunt diam, eu fringilla urna auctor at.</p>
+        </div>
+      </div>
     </div>
-
+    
   </body>
 </html>

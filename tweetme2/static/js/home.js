@@ -121,8 +121,9 @@ function loadTweets(tweetsElement){
 }
 loadTweets(tweetsContainerElement);
 
-function handleDidActionBtn(tweet_id, currentCount, action){
-    console.log(tweet_id, currentCount)
+function handleTweetActionBtn(tweet_id, currentCount, action){
+
+    alert(tweet_id, action)
     const url = '/api/tweets/action/'
     const method =  'POST'
     const data = JSON.stringify({
@@ -142,16 +143,16 @@ function handleDidActionBtn(tweet_id, currentCount, action){
 }   
 
 function LikeBtn(tweet){
-    return "<button class='btn btn-primary btn-sm' onclick='handleDidActionBtn(" +tweet.id+ ","+ tweet.likes+",'like')>Like " + tweet.likes + "</button>"
+    return "<button class='btn btn-primary btn-sm' onclick=handleTweetActionBtn(" +tweet.id+ ","+ tweet.likes+",'like')>Like " + tweet.likes + "</button>"
 }
 
 function UnLikeBtn(tweet){
-    return "<button class='btn btn-outline-primary btn-sm' onclick='handleDidActionBtn(" +tweet.id+ ","+ tweet.likes+",'unlike')>Unlike</button>"
+    return "<button class='btn btn-outline-primary btn-sm' onclick=handleTweetActionBtn(" +tweet.id+ ","+ tweet.likes+",'unlike')>Unlike</button>"
 }
 
 
 function RetweetBtn(tweet){
-    return "<button class='btn btn-outline-success btn-sm' onclick='handleDidActionBtn(" +tweet.id+ ","+ tweet.likes+",'retweet')>Retweet</button>"
+    return "<button class='btn btn-outline-success btn-sm' onclick=handleTweetActionBtn(" +tweet.id+ ","+ tweet.likes+",'retweet')>Retweet</button>"
 }
 
 function formatTweetElement(tweet){

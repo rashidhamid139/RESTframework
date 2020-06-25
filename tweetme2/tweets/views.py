@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from .forms import TweetForm
 from django.utils.http import is_safe_url
 from django.conf import settings
-from .serializers import TweetSerializer, TweetActionSerializer
+from .serializers import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -53,18 +53,22 @@ def tweet_action_view(request, *args, **kwargs):
         data = serializer.validated_data
         tweet_id = data.get("id")
         action = data.get("action")
+        content = data.get("content")
         qs = Tweet.objects.filter(id=tweet_id)
         if not qs.exists():
             return Response({}, status=404)
         obj = qs.first()
         if action == 'like':
+            obj.likes.add(request.user)
             serializer = TweetSerializer(obj)
             return Response(serializer.data, status=200)
-            obj.likes.add(request.user)
         elif action == 'unlike':
             obj.likes.remove(request.user)
         elif action == 'retweet':
-            pass
+            parent_obj = obj
+            new_tweet = Tweet.objects.create(user=request.user, parent=parent_obj, content=content, )
+            serializer = TweetSerializer(new_tweet)
+            return Response(serializer.data, status=200)
 
     # if request.user in obj.likes.all():
     #     obj.likes.remove(request.user)
@@ -85,7 +89,7 @@ def tweet_list_view_pure_django(request, *args, **kwargs):
 # @authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetSerializer(data=request.POST)
+    serializer = TweetCreateSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
         obj = serializer.save(user=request.user)
         return Response(serializer.data, status=201)
