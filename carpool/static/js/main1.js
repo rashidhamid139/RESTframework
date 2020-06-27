@@ -1,39 +1,43 @@
-$(document).ready(function(){
-    $('.clicky').on("click", function(){
-        if ($("div .clicky").is('.clicky')){
-            alert("Clicked")
-        }
-    })
-    $(".notice-close").on('click', function(){
-        $('.notice-warning').fadeOut('slow', function(){
-            $(this).remove()
-        })
-    })
 
-    $('.panel-tab').on('click', function(event){
-        event.preventDefault();
-        $('.panel-stage').slideToggle('slow', function(event){
-            if($(this).is(':visible')){
-                $('.panel-tab').html('Close <span>&#9650;</span>');
-            }
-            else{
-                $('.panel-tab').html('Open <span>&#9650;</span>');
-            }
-        })
-    })
+$(document).ready( function() {
+function close() {
+dialog.hide();
+$('#add-user').focus();
+}
+var title = $('<h1>Add User</h1>').attr('id', 'add-user-title'),
+closeButton = $('<button>close</button>')
+.addClass('close')
+.click(close)
+.appendTo(title),
+content = $('<div/>')
+.load('add.html'),
+dialog = $('<div/>')
+.attr({
+role: 'dialog',
+'aria-labelledby': 'add-user-title'
 })
-
-
-// Show the first tab by default
-$('.tabs-stage div').hide();
-$('.tabs-stage div:first').show();
-$('.tabs-nav li:first').addClass('tab-active');
-
-// Change tab class and display content
-$('.tabs-nav a').on('click', function(event){
-  event.preventDefault();
-  $('.tabs-nav li').removeClass('tab-active');
-  $(this).parent().addClass('tab-active');
-  $('.tabs-stage div').hide();
-  $($(this).attr('href')).show();
+.addClass('dialog')
+.keypress(function(event) {
+if (event.keyCode == 27) {
+close();
+}
+})
+.append(title)
+.append(content)
+.hide()
+.appendTo('body');
+$('#add-user').click(function() {
+var height = dialog.height(),
+width = dialog.width();
+dialog
+ .css({
+ top: ($(window).height() - height) / 2
+ + $(document).scrollTop(),
+ left: ($(window).width() - width) / 2
++ $(document).scrollLeft()
+})
+.show();
+dialog.find('#username').focus();
+return false;
+});
 });
