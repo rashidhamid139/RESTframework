@@ -20,18 +20,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qucl7ggum+lv57*hkr)w6^7=sw7_+46^ouanw+xsn2m0s!v4)*'
+SECRET_KEY = 'i_g4$#pd3)bqim31lge8j06$xd3=-)6))7s6qw(33mk(q7gt9w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'orm',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +40,6 @@ INSTALLED_APPS = [
     'polls',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_jwt',
-    'mode',
 ]
 
 MIDDLEWARE = [
@@ -56,10 +53,8 @@ MIDDLEWARE = [
 ]
 
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),

@@ -1,16 +1,17 @@
-from rest_framework.routers import DefaultRouter
 from django.urls import path
-from .apiviews import PollList, PollDetail, ChoiceList, CreateVote, PollViewSet, UserCreate, LoginView
+from rest_framework.routers import DefaultRouter
+
+from . import views
 
 router = DefaultRouter()
-router.register('polls', PollViewSet)
+router.register('polls', views.PollViewSet)
 
 urlpatterns = [
-    path("polls/", PollList.as_view(), name="polls_list"),
-    path("polls/<int:pk>/", PollDetail.as_view(), name="polls_detail"),
-    path("polls/<int:pk>/choices/", ChoiceList.as_view(), name="choice_list"),
-    path("polls/<int:pk>/choices/<int:choice_pk>/vote/", CreateVote.as_view(), name="create_vote"),
-    path("users/", UserCreate.as_view(), name="user_create"),
-    path('login/', LoginView.as_view(), name='login'),
-
+    path('polls/', views.PollList.as_view(), name='polls-list'),
+    path('polls/<int:pk>/', views.PollDetail.as_view(), name='polls-detail'),
+    path('polls/<int:pk>/choices/', views.ChoiceList.as_view(), name='choice-list'),
+    path('polls/<int:pk>/choices/<int:choice_pk>/vote/', views.CreateVote.as_view(), name='create-vote'),
+    path('users/', views.UserCreate.as_view(), name='user-create'),
 ]
+
+urlpatterns += router.urls
