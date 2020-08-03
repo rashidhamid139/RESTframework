@@ -1,0 +1,3 @@
+[2020-07-25 15:33:21,312: WARNING/MainProcess] /home/rashid139/Desktop/django2.x/lib/python3.6/site-packages/celery/fixups/django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  leak, never use this setting in production environments!''')

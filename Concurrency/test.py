@@ -1,13 +1,8 @@
-import requests
+from  requests import Request, Session
+
+
 import json
 
-
-s = requests.Session()
-
-s.auth = ('user', 'pass')
-
-s.headers.update({'x-test': 'true'})
-
-a = s.get('https://httpbin.org/headers', headers={'x-test2': 'true'})
-
-print(a.text)
+s = Session()
+req = Request('POST', url, data=data, headers=headers)
+prepped = req.prepare()
