@@ -11,12 +11,17 @@ I have provided links of the above code folders onto these blogs
 
 
 A little explanation of some of the above project examples
+
+
+
 Folder Name: mysite
 This folder contains code which explains how we can do
 tasks in django asynchronously,
 
 I have provided link of it in my blog App with title 
 "Django Asynchronous Tasks"
+
+
 
 Folder Name: carpool
 This is just a simple API which can be used for car 
